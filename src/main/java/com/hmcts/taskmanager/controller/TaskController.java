@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hmcts.taskmanager.service.TaskService;
 import com.hmcts.taskmanager.task.Task;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -25,13 +27,14 @@ public class TaskController {
 
     // Create a new task
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
         return ResponseEntity.ok(taskService.createTask(task));
     }
 
     // Get all tasks
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
+    	System.out.println("getAllTasks");
         return ResponseEntity.ok(taskService.getAllTasks());
     }
 
@@ -42,9 +45,9 @@ public class TaskController {
     }
 
     // Update task status
-    @PutMapping("/{id}/status")
-    public ResponseEntity<Task> updateTaskStatus(@PathVariable Long id, @RequestBody String status) {
-        return ResponseEntity.ok(taskService.updateTaskStatus(id, status));
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @Valid @RequestBody Task updatedTask) {
+        return ResponseEntity.ok(taskService.updateTaskStatus(id, updatedTask));
     }
 
     // Delete a task
