@@ -7,7 +7,6 @@ This is a Spring Boot backend API for managing tasks, built as part of the HMCTS
 - Create / Read / Update / Delete tasks
 - MySQL database integration
 - RESTful API endpoints
-- API skeleton with placeholder logic
 - SQL script included for manual database setup
 
 ## Tech Stack
