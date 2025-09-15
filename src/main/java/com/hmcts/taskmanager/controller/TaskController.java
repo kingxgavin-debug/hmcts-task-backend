@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hmcts.taskmanager.service.TaskService;
 import com.hmcts.taskmanager.task.Task;
-
-import jakarta.validation.Valid;
+import com.hmcts.taskmanager.task.Task.OnCreate;
+import com.hmcts.taskmanager.task.Task.OnUpdate;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -27,7 +28,7 @@ public class TaskController {
 
     // Create a new task
     @PostMapping
-    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
+    public ResponseEntity<Task> createTask(@Validated(OnCreate.class) @RequestBody Task task) {
         return ResponseEntity.ok(taskService.createTask(task));
     }
 
@@ -46,7 +47,7 @@ public class TaskController {
 
     // Update task status
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @Valid @RequestBody Task updatedTask) {
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @Validated(OnUpdate.class) @RequestBody Task updatedTask) {
         return ResponseEntity.ok(taskService.updateTaskStatus(id, updatedTask));
     }
 

@@ -22,18 +22,20 @@ This is a Spring Boot backend API for managing tasks, built as part of the HMCTS
 2. Run the SQL script in `src/main/resources/schema.sql` to create the `tasks` table
 3. Update `application.properties` with your MySQL credentials
 4. Run unit test
-
-```bash
 mvn test
-```
 Unit tests are located under `src/test/java`.  
 Controller tests use `@WebMvcTest` and `MockMvc` to validate API behavior without starting the full application.
 
-5. Run the project using:
+5. Clone the project:
+git clone https://github.com/kingxgavin-debug/hmcts-task-backend.git
+cd hmcts-task-backend
 
-```bash
+6. Build the project using:
+mvn clean install
+
+7. Run the project using:
 mvn spring-boot:run
-```
+
 
 ## Data Model
 

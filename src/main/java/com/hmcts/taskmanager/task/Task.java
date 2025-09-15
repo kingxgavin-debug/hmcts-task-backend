@@ -14,6 +14,9 @@ import jakarta.validation.constraints.*;
 @Table(name = "tasks")
 public class Task {
 
+	public interface OnCreate {}
+	public interface OnUpdate {}
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +33,7 @@ public class Task {
     private String status;
  
     @NotNull(message = "Due date is required")
-    @Future(message = "Due date must be in the future")
+    @FutureOrPresent(message = "Due date must be in the future Time", groups = OnCreate.class)
     private LocalDateTime dueDate;
     public Task() {}
 
